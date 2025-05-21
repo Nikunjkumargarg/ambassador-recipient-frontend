@@ -44,9 +44,29 @@ export default function Dashboard() {
           console.error("Error fetching distributor summary:", error);
         }
       };
-
       fetchCustomers();
       fetchDistributors();
+    }
+
+    if (userRole === "distributor") {
+      const fetchDistributorStats = async () => {
+        try {
+          const response = await fetch(
+            "http://localhost:3000/admin/distributor-summary",
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          const data = await response.json();
+          setDistributors([data]); // Keep in array form
+        } catch (error) {
+          console.error("Error fetching distributor stats:", error);
+        }
+      };
+
+      fetchDistributorStats();
     }
   }, []);
 
@@ -161,12 +181,40 @@ export default function Dashboard() {
         )}
 
         {role === "distributor" && (
-          <Link
-            to="/create-customer"
-            className="text-white bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded shadow text-sm text-center"
-          >
-            ➕ Create Customer
-          </Link>
+          <>
+            <Link
+              to="/create-customer"
+              className="text-white bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded shadow text-sm text-center"
+            >
+              ➕ Create Customer
+            </Link>
+
+            {distributors.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm mb-10 mt-6">
+                <div className="bg-blue-50 border border-blue-300 p-5 rounded shadow">
+                  <p className="text-gray-600 font-medium">
+                    Total Units Assigned
+                  </p>
+                  <p className="text-xl font-bold text-blue-700">
+                    {distributors[0].quantity_alloted}
+                  </p>
+                </div>
+                <div className="bg-green-50 border border-green-300 p-5 rounded shadow">
+                  <p className="text-gray-600 font-medium">Units Sold</p>
+                  <p className="text-xl font-bold text-green-700">
+                    {distributors[0].quantity_alloted -
+                      distributors[0].quantity_remaining}
+                  </p>
+                </div>
+                <div className="bg-yellow-50 border border-yellow-300 p-5 rounded shadow">
+                  <p className="text-gray-600 font-medium">Units Remaining</p>
+                  <p className="text-xl font-bold text-yellow-700">
+                    {distributors[0].quantity_remaining}
+                  </p>
+                </div>
+              </div>
+            )}
+          </>
         )}
       </div>
 
