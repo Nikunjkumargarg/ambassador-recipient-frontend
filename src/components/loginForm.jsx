@@ -105,7 +105,7 @@ export default function LoginForm() {
               : "bg-gray-200"
           }`}
         >
-          Distributor
+          Ambassador
         </button>
       </div>
 

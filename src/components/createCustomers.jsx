@@ -71,7 +71,7 @@ export default function CreateCustomer() {
       setOtpSent(false);
       setOtpVerified(false);
     } else {
-      alert(data.message || "Failed to create customer");
+      alert(data.message || "Failed to create recipient");
     }
   };
 
@@ -139,7 +139,7 @@ export default function CreateCustomer() {
               : "bg-gray-400 cursor-not-allowed"
           }`}
         >
-          Create Customer
+          Create Recipient
         </button>
       </form>
     </div>
