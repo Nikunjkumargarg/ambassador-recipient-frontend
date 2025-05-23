@@ -4,8 +4,8 @@ import UploadDistributors from "./components/uploadDistributos";
 import CreateCustomer from "./components/createCustomers";
 import PrivateRoute from "./components/PrivateRoute";
 import userLogoutConfirmation from "./components/userLogoutConfirmation";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import './main.css'
 
 // Separate component to use hooks inside Router context
 function AppRoutes() {
@@ -44,9 +44,7 @@ function AppRoutes() {
 
 function App() {
   return (
-    <Router>
       <AppRoutes />
-    </Router>
   );
 }
 
